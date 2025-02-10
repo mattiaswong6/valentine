@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 
 export default function Home() {
-  const [mailSrc, setMailSrc] = useState('mail_closed.png');
+  const [mailSrc, setMailSrc] = useState('/mail_closed.png');
   const [isYes, setIsYes] = useState(false);
   const [isNoClicked, setIsNoClicked] = useState(false);
 
@@ -12,17 +12,17 @@ export default function Home() {
   const [sizeY, setSizeY] = useState(20); // Initial size in rem
 
   const noImages = [
-    'sad-reactions/sad-cat-2.gif',
-    'sad-reactions/sad-cat.jpg',
-    'sad-reactions/sad-hamster.gif',
-    'sad-reactions/sad-iroh.jpg',
-    'sad-reactions/sad-dog.jpg'
+    '/sad-reactions/sad-cat-2.gif',
+    '/sad-reactions/sad-cat.jpg',
+    '/sad-reactions/sad-hamster.gif',
+    '/sad-reactions/sad-iroh.jpg',
+    '/sad-reactions/sad-dog.jpg'
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleMailClick = () => {
-    setMailSrc((prevSrc) => (prevSrc === 'mail_closed.png' ? 'mail_opened.png' : 'mail_closed.png'));
+    setMailSrc((prevSrc) => (prevSrc === '/mail_closed.png' ? '/mail_opened.png' : '/mail_closed.png'));
   }
 
   const handleNoClick = () => {
@@ -57,20 +57,22 @@ export default function Home() {
               src={mailSrc}
               alt="Mail"
               width={500}
+              height={500}
               onClick={handleMailClick}
-              className={mailSrc === 'mail_closed.png' ? 'mail-hover' : ''}
+              className={mailSrc === '/mail_closed.png' ? 'mail-hover' : ''}
               />
             <h1 className="text-4xl sm:text-5xl">
-            You've got mail!
+              {`You've got mail!`}
             </h1>
           </div>
           <Image
-          src="heart.png"
+          src="/heart.png"
           alt="Heart"
           width={200}
-          className={`heart ${mailSrc === 'mail_opened.png' ? '' : 'hidden'}`}
+          height={200}
+          className={`heart ${mailSrc === '/mail_opened.png' ? '' : 'hidden'}`}
           />
-          <div className={`form absolute max-w-[800px] text-md p-4 ${mailSrc === 'mail_opened.png' ? 'flex' : 'hidden'}`}>
+          <div className={`form absolute max-w-[800px] text-md p-4 ${mailSrc === '/mail_opened.png' ? 'flex' : 'hidden'}`}>
             <div className="message">
               <h4>Dear, Haven</h4>
               <br />
@@ -101,6 +103,7 @@ export default function Home() {
                 src={noImages[currentIndex]}
                 alt="Sad Reaction"
                 width={200}
+                height={200}
                 className={`${isNoClicked ? '' : 'invisible'}`}
               />
             </div>
@@ -112,7 +115,7 @@ export default function Home() {
         <div className='text-center flex flex-col items-center'>
           <h4>Wooo! See you on Friday!</h4>
           <br />
-          <Image alt="avatar" width={150} src="aang-avatar.gif"/>
+          <Image alt="avatar" width={150} height={150} src="/aang-avatar.gif"/>
           <br />
           <p className={`${isNoClicked ? 'invisible' : ''}`}>
             ps. next time try clicking no
