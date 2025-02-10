@@ -73,7 +73,7 @@ export default function Home() {
           />
           <div className={`form absolute max-w-[800px] text-md p-4 ${mailSrc === '/mail_opened.png' ? 'flex' : 'hidden'}`}>
             <div className="message">
-              <h4>Dear, Haven</h4>
+              <h4>Dear Haven,</h4>
               <br />
               <h4>Will you be my valentine?</h4>
               <br />
