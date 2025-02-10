@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react";
+import Image from "next/image";
 
 export default function Home() {
   const [mailSrc, setMailSrc] = useState('mail_closed.png');
@@ -52,7 +53,7 @@ export default function Home() {
       { !isYes ?
         <div className="container">
           <div className="mail container">
-            <img
+            <Image
               src={mailSrc}
               alt="Mail"
               width={500}
@@ -63,8 +64,9 @@ export default function Home() {
             You've got mail!
             </h1>
           </div>
-          <img
+          <Image
           src="heart.png"
+          alt="Heart"
           width={200}
           className={`heart ${mailSrc === 'mail_opened.png' ? '' : 'hidden'}`}
           />
@@ -95,7 +97,7 @@ export default function Home() {
             </div>
 
             <div className="img-container flex justify-center">
-              <img
+              <Image
                 src={noImages[currentIndex]}
                 alt="Sad Reaction"
                 width={200}
@@ -110,7 +112,7 @@ export default function Home() {
         <div className='text-center flex flex-col items-center'>
           <h4>Wooo! See you on Friday!</h4>
           <br />
-          <img width={150} src="aang-avatar.gif"/>
+          <Image alt="avatar" width={150} src="aang-avatar.gif"/>
           <br />
           <p className={`${isNoClicked ? 'invisible' : ''}`}>
             ps. next time try clicking no
