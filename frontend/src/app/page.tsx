@@ -1,6 +1,5 @@
 "use client"
 
-import Image from "next/image";
 import { useState } from "react";
 
 export default function Home() {
@@ -26,8 +25,8 @@ export default function Home() {
   }
 
   const handleNoClick = () => {
-    var x = Math.floor(Math.random()*300)+1;
-    var y = Math.floor(Math.random()*400)+1;
+    let x = Math.floor(Math.random()*300)+1;
+    let y = Math.floor(Math.random()*400)+1;
     setIsNoClicked(true);
     
     const linkElement = document.querySelector('#no');
