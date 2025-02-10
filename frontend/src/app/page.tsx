@@ -8,6 +8,7 @@ export default function Home() {
   const [isYes, setIsYes] = useState(false);
   const [isNoClicked, setIsNoClicked] = useState(false);
 
+  const [position, setPosition] = useState({x: 0, y: 0});
   const [sizeX, setSizeX] = useState(5); // Initial size in rem
   const [sizeY, setSizeY] = useState(20); // Initial size in rem
 
@@ -26,19 +27,15 @@ export default function Home() {
   }
 
   const handleNoClick = () => {
-    const x = Math.floor(Math.random()*300)+1;
-    const y = Math.floor(Math.random()*400)+1;
+    setPosition({
+      x: Math.floor(Math.random()*300)+1,
+      y: Math.floor(Math.random()*400)+1
+    })
+
     setIsNoClicked(true);
-    
-    const linkElement = document.querySelector('#no');
-    linkElement.style.position = 'absolute';
-    linkElement.style.right = `${x}px`;
-    linkElement.style.bottom = `${y}px`;
 
     setSizeX((prev) => prev*2);
     setSizeY((prev) => prev*1.5);
-    const linkYesElement = document.querySelector('#yes');
-    linkYesElement.style.padding = `${sizeX}px ${sizeY}px`;
 
     setCurrentIndex((prevIndex) => (prevIndex + 1) % noImages.length);
   };
@@ -84,16 +81,22 @@ export default function Home() {
             <div className="yesno">
               <a id="yes"
                   onClick={handleYes}
+                  style={{ padding: `${sizeX}px ${sizeY}px` }}
               >
                 Yes
               </a>
               <a
-                id="no"
-                className={`no ${isNoClicked ? 'absolute-position' : ''}`}
-                onClick={handleNoClick}>
+                className={`no ${isNoClicked ? 'absolute-position' : 'hidden'}`}
+                onClick={handleNoClick}
+                style={{
+                  position: `absolute`,
+                  right: `${position.x}px`,
+                  bottom: `${position.y}px`,
+                }}>
                 No
               </a>
-              <a className={` ${isNoClicked ? 'invisible' : 'hidden'}`}>
+              <a className={`no ${isNoClicked ? 'hidden' : ''}`}
+                  onClick={handleNoClick}>
                 No
               </a>
             </div>
