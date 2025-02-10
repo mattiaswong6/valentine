@@ -16,7 +16,9 @@ export default function Home() {
     '/sad-reactions/sad-cat-2.gif',
     '/sad-reactions/sad-cat.jpg',
     '/sad-reactions/sad-hamster.gif',
+    '/sad-reactions/rosie.jpg',
     '/sad-reactions/sad-iroh.jpg',
+    '/sad-reactions/marley.png',
     '/sad-reactions/sad-dog.jpg'
   ];
 
