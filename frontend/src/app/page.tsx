@@ -25,8 +25,8 @@ export default function Home() {
   }
 
   const handleNoClick = () => {
-    let x = Math.floor(Math.random()*300)+1;
-    let y = Math.floor(Math.random()*400)+1;
+    const x = Math.floor(Math.random()*300)+1;
+    const y = Math.floor(Math.random()*400)+1;
     setIsNoClicked(true);
     
     const linkElement = document.querySelector('#no');
