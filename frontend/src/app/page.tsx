@@ -1,101 +1,126 @@
+"use client"
+
 import Image from "next/image";
+import { useState } from "react";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [mailSrc, setMailSrc] = useState('mail_closed.png');
+  const [isYes, setIsYes] = useState(false);
+  const [isNoClicked, setIsNoClicked] = useState(false);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const [sizeX, setSizeX] = useState(5); // Initial size in rem
+  const [sizeY, setSizeY] = useState(20); // Initial size in rem
+
+  const noImages = [
+    'sad-reactions/sad-cat-2.gif',
+    'sad-reactions/sad-cat.jpg',
+    'sad-reactions/sad-hamster.gif',
+    'sad-reactions/sad-iroh.jpg',
+    'sad-reactions/sad-dog.jpg'
+  ];
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const handleMailClick = () => {
+    setMailSrc((prevSrc) => (prevSrc === 'mail_closed.png' ? 'mail_opened.png' : 'mail_closed.png'));
+  }
+
+  const handleNoClick = () => {
+    var x = Math.floor(Math.random()*300)+1;
+    var y = Math.floor(Math.random()*400)+1;
+    setIsNoClicked(true);
+    
+    const linkElement = document.querySelector('#no');
+    linkElement.style.position = 'absolute';
+    linkElement.style.right = `${x}px`;
+    linkElement.style.bottom = `${y}px`;
+
+    setSizeX((prev) => prev*2);
+    setSizeY((prev) => prev*1.5);
+    const linkYesElement = document.querySelector('#yes');
+    linkYesElement.style.padding = `${sizeX}px ${sizeY}px`;
+
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % noImages.length);
+  };
+
+  const handleYes = () => {
+    setIsYes(true);
+  }
+
+  return (
+    <>
+    <div>
+      { !isYes ?
+        <div className="container">
+          <div className="mail container">
+            <img
+              src={mailSrc}
+              alt="Mail"
+              width={500}
+              onClick={handleMailClick}
+              className={mailSrc === 'mail_closed.png' ? 'mail-hover' : ''}
+              />
+            <h1 className="text-4xl sm:text-5xl">
+            You've got mail!
+            </h1>
+          </div>
+          <img
+          src="heart.png"
+          width={200}
+          className={`heart ${mailSrc === 'mail_opened.png' ? '' : 'hidden'}`}
+          />
+          <div className={`form absolute max-w-[800px] text-md p-4 ${mailSrc === 'mail_opened.png' ? 'flex' : 'hidden'}`}>
+            <div className="message">
+              <h4>Dear, Haven</h4>
+              <br />
+              <h4>Will you be my valentine?</h4>
+              <br />
+              <h4>Mattias</h4>
+            </div>
+
+            <div className="yesno">
+              <a id="yes"
+                  onClick={handleYes}
+              >
+                Yes
+              </a>
+              <a
+                id="no"
+                className={`no ${isNoClicked ? 'absolute-position' : ''}`}
+                onClick={handleNoClick}>
+                No
+              </a>
+              <a className={` ${isNoClicked ? 'invisible' : 'hidden'}`}>
+                No
+              </a>
+            </div>
+
+            <div className="img-container flex justify-center">
+              <img
+                src={noImages[currentIndex]}
+                alt="Sad Reaction"
+                width={200}
+                className={`${isNoClicked ? '' : 'invisible'}`}
+              />
+            </div>
+          </div>
+
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        :
+        <>
+        <div className='text-center flex flex-col items-center'>
+          <h4>Wooo! See you on Friday!</h4>
+          <br />
+          <img width={150} src="aang-avatar.gif"/>
+          <br />
+          <p className={`${isNoClicked ? 'invisible' : ''}`}>
+            ps. next time try clicking no
+          </p>
+
+        </div>
+        </>
+      }
     </div>
+    </>
   );
 }

@@ -2,20 +2,108 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@font-face {
+  font-family: 'ShortStack';
+  src: url('/ShortStack-Regular.otf');
+ }
+
+body {
+  background-color: rgb(248, 211, 200);
+  color: rgb(60, 60, 60);
+  font-family: 'ShortStack', cursive;
+  display: flex;
+  flex-direction: column;
+  height: 100svh;
+  width: 100svw;
+  justify-content: center;
+  align-items: center;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.mail-hover {
+  animation: shake .3s infinite;
+  cursor: pointer;
+}
+
+@keyframes shake {
+  25% {
+    transform: rotate(-2deg);
+  }
+  75% {
+    transform: rotate(2deg);
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+.heart {
+  position: absolute;
+  transform: translateY(-80%);
+  animation: flyup 1s forwards;
+}
+
+@keyframes flyup {
+  100% {
+    transform: translateY(-400%);
+  }
+}
+
+.form {
+  border-radius: 20px;
+  border: solid rgb(60, 60, 60) 5px;
+  background-color: rgb(253, 247, 241);
+  animation: form-grow 1s ease forwards .1s;
+  height: 60svh;
+  width: 80vw;
+  opacity: 0;
+  flex-direction: column;
+}
+
+@keyframes form-grow {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.message {
+  height: 40%;
+}
+
+.yesno {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 20%;
+}
+
+.yesno a {
+  padding: 5px 20px;
+  border-radius: 15px;
+  border: solid rgb(60, 60, 60) 3px;
+  cursor: pointer;
+  transition: all .2s;
+}
+
+#yes {
+  background-color: rgb(203, 255, 168);
+}
+
+.no {
+  background-color: rgb(253, 190, 190);
+}
+
+.img-container {
+  height: 40%;
+}
+
+.img-container img {
+  height: 90%;
 }
